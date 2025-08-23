@@ -58,36 +58,38 @@
   </div>
   <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
 
-  <script>
-    function updateTime() {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
+ <script>
+  function updateTime() {
+    const now = new Date();
+    const hours12 = now.getHours() % 12 || 12;  // ✅ convert to 12-hour format
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
 
-      // Day names
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const day = days[now.getDay()];
+    // Day names
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const day = days[now.getDay()];
 
-      // Format date as mm.dd.yyyy
-      const mm = String(now.getMonth() + 1).padStart(2, '0');
-      const dd = String(now.getDate()).padStart(2, '0');
-      const yyyy = now.getFullYear();
+    // Format date as mm.dd.yyyy
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const yyyy = now.getFullYear();
 
-      const dateFormatted = `${mm}.${dd}.${yyyy}`;
+    const dateFormatted = `${mm}.${dd}.${yyyy}`;
 
-      document.getElementById('clock').textContent = `${hours}:${minutes}`;
-      document.getElementById('date').textContent = `${day}, ${dateFormatted}`;
-    }
+    document.getElementById('clock').textContent = `${hours12}:${minutes} ${ampm}`;
+    document.getElementById('date').textContent = `${day}, ${dateFormatted}`;
+  }
 
-    function toggleClockMargin() {
-      const clockElement = document.querySelector('.clock');
-      clockElement.style.marginBottom =
-        clockElement.style.marginBottom === '4rem' ? '0rem' : '4rem';
-    }
+  function toggleClockMargin() {
+    const clockElement = document.querySelector('.clock');
+    clockElement.style.marginBottom =
+      clockElement.style.marginBottom === '4rem' ? '0rem' : '4rem';
+  }
 
-    setInterval(updateTime, 1000);
-    setInterval(toggleClockMargin, 5 * 60 * 1000);
-    updateTime();
-  </script>
+  setInterval(updateTime, 1000);
+  setInterval(toggleClockMargin, 5 * 60 * 1000);
+  updateTime();
+</script>
+
 </body>
 </html>

@@ -16,63 +16,66 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            text-align: center;
         }
         .clock {
-            font-size: 15vw; /* Font size scales with viewport width */
+            font-size: 15vw;
             margin-bottom: 0rem;
             font-weight: 600;
-            font-family: "Segoe UI", Arial, sans-serif;
         }
         .date {
-            font-size: 4vw; /* Font size scales with viewport width */
+            font-size: 4vw;
             font-weight: 600;
-            font-family: "Segoe UI", Arial, sans-serif;
+            margin-bottom: 2rem;
         }
-        .wlr {
-            font-family: "Segoe UI", Arial, sans-serif !important;
-            font-style: normal;
-            font-weight: 600;
-            position: absolute;
-            top: 15px;
-            right: 20px;
+        .weather {
+            font-size: 2vw;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    
-
-  
     <div class="clock" id="clock"></div>
     <div class="date" id="date"></div>
 
-    <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a></div>
-    <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
-   
+    <!-- Weather widget BELOW clock/date -->
+    <div class="weather">
+        <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>
+            Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a>
+        </div>
+        <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
+    </div>
+
     <script>
         function updateTime() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            // Day names
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const day = days[now.getDay()];
-            const date = now.toLocaleDateString('de-DE');
+
+            // Format date as mm.dd.yyyy
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const yyyy = now.getFullYear();
+
+            const dateFormatted = `${mm}.${dd}.${yyyy}`;
 
             document.getElementById('clock').textContent = `${hours}:${minutes}`;
-            document.getElementById('date').textContent = `${day}, ${date}`;
+            document.getElementById('date').textContent = `${day}, ${dateFormatted}`;
         }
 
         function toggleClockMargin() {
             const clockElement = document.querySelector('.clock');
-            if (clockElement.style.marginBottom === '4rem') {
-                clockElement.style.marginBottom = '0rem';
-            } else {
-                clockElement.style.marginBottom = '4rem';
-            }
+            clockElement.style.marginBottom =
+                clockElement.style.marginBottom === '4rem' ? '0rem' : '4rem';
         }
 
         setInterval(updateTime, 1000);
         setInterval(toggleClockMargin, 5 * 60 * 1000); // Toggle margin every 5 minutes
-        updateTime(); // Initial call to display immediately
+        updateTime(); // Initial call
     </script>
 </body>
 </html>

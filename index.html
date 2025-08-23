@@ -29,8 +29,9 @@
             margin-bottom: 2rem;
         }
         .weather {
-            font-size: 2vw;
             margin-top: 1rem;
+            max-width: 400px;     /* ✅ keep it from spanning full width */
+            text-align: center;   /* ✅ center align contents */
         }
     </style>
 </head>
@@ -74,8 +75,8 @@
         }
 
         setInterval(updateTime, 1000);
-        setInterval(toggleClockMargin, 5 * 60 * 1000); // Toggle margin every 5 minutes
-        updateTime(); // Initial call
+        setInterval(toggleClockMargin, 5 * 60 * 1000);
+        updateTime();
     </script>
 </body>
 </html>

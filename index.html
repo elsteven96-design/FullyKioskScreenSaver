@@ -1,85 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Clock and Date</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: "Segoe UI", Arial, sans-serif;
-            font-style: normal;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .clock {
-            font-size: 15vw;
-            margin-bottom: 0rem;
-            font-weight: 600;
-        }
-        .date {
-            font-size: 4vw;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-        .weather {
-            margin-top: 1rem;
-            display: flex;              /* horizontal layout */
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Clock and Date</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-style: normal;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .clock {
+      font-size: 15vw;
+      margin-bottom: 0rem;
+      font-weight: 600;
+    }
+    .date {
+      font-size: 4vw;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+    /* ✅ Weather wrapper (not the widget itself) */
+    .weather {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    /* ✅ Make sure widget fills only as much space as needed */
+    #id187aa5874b376 {
+      display: inline-block !important;
+    }
+  </style>
 </head>
 <body>
-    <div class="clock" id="clock"></div>
-    <div class="date" id="date"></div>
+  <div class="clock" id="clock"></div>
+  <div class="date" id="date"></div>
 
-    <!-- Weather widget BELOW clock/date -->
-    <div class="weather">
-        <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>
-            Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a>
-        </div>
-        <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
+  <!-- Weather widget BELOW clock/date -->
+  <div class="weather">
+    <div id="id187aa5874b376"
+      a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>
+      Weather Data Source: 
+      <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a>
     </div>
+  </div>
+  <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
 
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
 
-            // Day names
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const day = days[now.getDay()];
+      // Day names
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const day = days[now.getDay()];
 
-            // Format date as mm.dd.yyyy
-            const mm = String(now.getMonth() + 1).padStart(2, '0');
-            const dd = String(now.getDate()).padStart(2, '0');
-            const yyyy = now.getFullYear();
+      // Format date as mm.dd.yyyy
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const yyyy = now.getFullYear();
 
-            const dateFormatted = `${mm}.${dd}.${yyyy}`;
+      const dateFormatted = `${mm}.${dd}.${yyyy}`;
 
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
-            document.getElementById('date').textContent = `${day}, ${dateFormatted}`;
-        }
+      document.getElementById('clock').textContent = `${hours}:${minutes}`;
+      document.getElementById('date').textContent = `${day}, ${dateFormatted}`;
+    }
 
-        function toggleClockMargin() {
-            const clockElement = document.querySelector('.clock');
-            clockElement.style.marginBottom =
-                clockElement.style.marginBottom === '4rem' ? '0rem' : '4rem';
-        }
+    function toggleClockMargin() {
+      const clockElement = document.querySelector('.clock');
+      clockElement.style.marginBottom =
+        clockElement.style.marginBottom === '4rem' ? '0rem' : '4rem';
+    }
 
-        setInterval(updateTime, 1000);
-        setInterval(toggleClockMargin, 5 * 60 * 1000);
-        updateTime();
-    </script>
+    setInterval(updateTime, 1000);
+    setInterval(toggleClockMargin, 5 * 60 * 1000);
+    updateTime();
+  </script>
 </body>
 </html>

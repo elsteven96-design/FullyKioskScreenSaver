@@ -30,8 +30,11 @@
         }
         .weather {
             margin-top: 1rem;
-            max-width: 400px;     /* ✅ keep it from spanning full width */
-            text-align: center;   /* ✅ center align contents */
+            display: flex;              /* horizontal layout */
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -42,7 +45,7 @@
     <!-- Weather widget BELOW clock/date -->
     <div class="weather">
         <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>
-            <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a>
+            Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a>
         </div>
         <script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
     </div>

@@ -45,7 +45,8 @@
 <body>
     <!-- Visit This URL https://sharpweather.com/widget/r/#c=cbkg=rgb(69,90,100)&c=codd=rgb(84,110,122) and edit your Weather Widget. Else, if you don't want it, delete or comment out this weather block. -->
 
-   <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"rgb(69,90,100)","cfnt":"#FFFFFF","codd":"rgb(84,110,122)","cont":"#E0E0E0"}'>Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a></div><script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
+    <!-- Weather block Starts 
+    <div id="id187aa5874b376" a='{"t":"r","v":"1.2","lang":"en","locs":[1148],"ssot":"f","sics":"ms","cbkg":"#000000","cfnt":"#FFFFFF","codd":"#000000","cont":"#E0E0E0"}'>Weather Data Source: <a href="https://sharpweather.com/weather_albuquerque/30_days/">Albuquerque weather 30 days</a></div><script async src="https://static1.sharpweather.com/widgetjs/?id=id187aa5874b376"></script>
 
 
     <div class="clock" id="clock"></div>
@@ -56,6 +57,7 @@
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
             //// Croatian
             //const days = ['Nedjelja', 'Ponedjeljak', 'Utorak', 'Srijeda', 'Četvrtak', 'Petak', 'Subota'];
             //// English
@@ -87,7 +89,7 @@
             const day = days[now.getDay()];
             const date = now.toLocaleDateString('de-DE');
 
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
             document.getElementById('date').textContent = `${day}, ${date}`;
         }
 
